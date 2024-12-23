@@ -1,9 +1,6 @@
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
+import { setIsLoadedProducts } from '../../../../../../actions';
 import styled from 'styled-components';
-import { loadProductsAsync, setNotFoundProducts } from '../../../../../../actions';
-import { useServerRequest } from '../../../../../../hooks';
-import { selectSearchPhrase } from '../../../../../../selectors';
-import { useEffect } from 'react';
 
 const IconContainer = styled.div`
 	margin: 0 10px 0 18px;
@@ -16,22 +13,12 @@ const TextContainer = styled.div`
 	cursor: pointer;
 `;
 
-const CategoryProductContainer = ({ className, id, name, IconComponent, searchPhrase }) => {
+const CategoryProductContainer = ({ className, id, name, IconComponent }) => {
 	const dispatch = useDispatch();
-	const requestServer = useServerRequest();
 
 	const onProductsUpdate = (categoryId) => {
-		dispatch(loadProductsAsync(requestServer, categoryId, searchPhrase)).then((loadProducts) => {
-			console.log(loadProducts);
-			if (loadProducts.payload.length === 0) {
-				dispatch(setNotFoundProducts({ notFoundProducts: true }));
-			}
-		});
+		dispatch(setIsLoadedProducts({ isLoaded: true, categoryId: categoryId, categoryName: name }));
 	};
-
-	// useEffect(() => {
-	// 	onProductsUpdate(id);
-	// }, [searchPhrase]);
 
 	return (
 		<div className={className}>

@@ -1,18 +1,18 @@
 import { ReactComponent as CrossSVG } from '../../icons/x.svg';
 import { ReactComponent as LockSVG } from '../../icons/lock.svg';
 import { ReactComponent as EyeInputSVG } from '../../icons/eye-input.svg';
-import { H1, Input, Button, StyledLink, Icon, FormError } from '../../components';
-import { useForm } from 'react-hook-form';
-import { yupResolver } from '@hookform/resolvers/yup';
-import { getDefaultValuesAndFormScheme } from './utils';
-import styled from 'styled-components';
 import { useDispatch, useSelector } from 'react-redux';
-import { closeModal, openModal, setUser } from '../../actions';
-import { useState } from 'react';
-import { ROLE } from '../../constants';
+import { yupResolver } from '@hookform/resolvers/yup';
 import { Navigate } from 'react-router-dom';
-import { selectUserRole } from '../../selectors';
+import { useForm } from 'react-hook-form';
+import { useState } from 'react';
+import { H1, Input, Button, StyledLink, Icon, FormError } from '../../components';
+import { closeModal, openModal, setUser } from '../../actions';
 import { useResetForm, useServerRequest } from '../../hooks';
+import { getDefaultValuesAndFormScheme } from './utils';
+import { selectUserRole } from '../../selectors';
+import { ROLE } from '../../constants';
+import styled from 'styled-components';
 
 const RegistrationOrAuthorizationContainer = ({ className, isRegistration }) => {
 	const dispatch = useDispatch();

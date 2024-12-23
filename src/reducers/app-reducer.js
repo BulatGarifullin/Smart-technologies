@@ -2,13 +2,15 @@ import { ACTION_TYPE } from '../actions';
 
 const initialAppState = {
 	wasLogout: false,
-	notFoundProducts: false,
+	isLoadedProducts: {
+		isLoaded: false,
+		categoryId: null,
+		categoryName: null,
+	},
 	modal: {
 		isOpen: false,
 		isAuthorization: false,
 		isRegistration: false,
-		// onConfirm: () => {},
-		// onCancel: () => {},
 	},
 	search: {
 		shouldSearch: false,
@@ -28,13 +30,19 @@ export const appReducer = (state = initialAppState, action) => {
 			};
 		case ACTION_TYPE.CLOSE_MODAL:
 			return { ...initialAppState };
-		case ACTION_TYPE.SET_NOT_FOUND_PRODUCTS:
-			return { ...initialAppState, ...action.payload };
 		case ACTION_TYPE.SET_SEARCH:
 			return {
 				...state,
 				search: {
 					...initialAppState.search,
+					...action.payload,
+				},
+			};
+		case ACTION_TYPE.SET_IS_LOADED_PRODUCTS:
+			return {
+				...state,
+				isLoadedProducts: {
+					...initialAppState.isLoadedProducts,
 					...action.payload,
 				},
 			};

@@ -2,11 +2,11 @@ import { useDispatch } from 'react-redux';
 import { ReactComponent as Logotype } from '../../../../icons/logo.svg';
 import { StyledLink } from '../../../styled-link/styled-link';
 import styled from 'styled-components';
-import { resetProducts } from '../../../../actions';
+import { setIsLoadedProducts } from '../../../../actions';
 
 const LogoContainer = ({ className }) => {
 	const dispatch = useDispatch();
-	const onResetProducts = () => dispatch(resetProducts());
+	const onResetProducts = () => dispatch(setIsLoadedProducts({ isLoaded: false, categoryId: null, categoryName: null }));
 
 	return (
 		<StyledLink to="/" onClick={onResetProducts}>

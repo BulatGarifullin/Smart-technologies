@@ -4,13 +4,12 @@ import { ReactComponent as EyeSVG } from '../../../../icons/eye.svg';
 import { ReactComponent as LikeSVG } from '../../../../icons/like.svg';
 import { ReactComponent as SignSVG } from '../../../../icons/sign in.svg';
 import { StyledLink, Button, Icon } from '../../../';
-import { useState } from 'react';
 import { Search } from './components';
-import styled from 'styled-components';
 import { useDispatch, useSelector } from 'react-redux';
 import { logout, openModal } from '../../../../actions';
 import { selectUserRole, selectUserSession } from '../../../../selectors';
 import { ROLE } from '../../../../constants';
+import styled from 'styled-components';
 
 const ControlPanelContainer = ({ className }) => {
 	const dispatch = useDispatch();

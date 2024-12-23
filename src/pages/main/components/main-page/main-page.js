@@ -1,15 +1,15 @@
 import { CategoryProduct, Carousel } from './components';
 import { getCategoryIcon } from '../../../../utils/get-category-icon';
-import styled from 'styled-components';
 import { Img } from '../../../../components';
 import sliderImage from '../../../../images/slider.png';
+import styled from 'styled-components';
 
-const MainPageContainer = ({ className, categorys, searchPhrase }) => {
+const MainPageContainer = ({ className, categorys }) => {
 	return (
 		<section className={className}>
 			<div className="catalog">
 				{categorys.map(({ id, name, iconKey }) => (
-					<CategoryProduct key={id} id={id} name={name} IconComponent={getCategoryIcon(iconKey)} searchPhrase={searchPhrase} />
+					<CategoryProduct key={id} id={id} name={name} IconComponent={getCategoryIcon(iconKey)} />
 				))}
 			</div>
 			<div className="carousel">
