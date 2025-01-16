@@ -12,11 +12,11 @@ const NavigationContainer = ({ className }) => {
 					<div> Каталог товаров</div>
 				</div>
 				<div className="nav-link">
-					<StyledLink to="">Акции</StyledLink>
-					<StyledLink to="">Рассрочка 0|0|18</StyledLink>
-					<StyledLink to="">Сервис и гарантия</StyledLink>
-					<StyledLink to="">Опт/дропшиппинг</StyledLink>
-					<StyledLink to="">Контакты</StyledLink>
+					<StyledLink to="/plug">Акции</StyledLink>
+					<StyledLink to="/plug">Рассрочка 0|0|18</StyledLink>
+					<StyledLink to="/plug">Сервис и гарантия</StyledLink>
+					<StyledLink to="/plug">Опт/дропшиппинг</StyledLink>
+					<StyledLink to="/plug">Контакты</StyledLink>
 				</div>
 			</div>
 		</nav>

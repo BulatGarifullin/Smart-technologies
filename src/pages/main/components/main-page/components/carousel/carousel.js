@@ -66,6 +66,7 @@ export const Carousel = styled(CarouselContainer)`
 	display: flex;
 	align-items: center;
 	padding: 20px 0 0 0;
+	user-select: none;
 
 	& .window {
 		position: relative;

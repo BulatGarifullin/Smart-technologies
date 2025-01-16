@@ -5,7 +5,7 @@ export const transformSession = (dbSession) => ({
 		id: dbSession.user.id,
 		login: dbSession.user.login,
 		password: dbSession.user.password,
-		registeredAt: dbSession.user.registered_at,
-		roleId: dbSession.user.role_id,
+		registeredAt: dbSession.user.registeredAt,
+		roleId: dbSession.user.roleId,
 	},
 });

@@ -6,3 +6,8 @@ export * from './get-categorys';
 export * from './get-products-bestsellers';
 export * from './get-products';
 export * from './add-user';
+export * from './get-all-products';
+export * from './get-product';
+export * from './add-product';
+export * from './updated-product';
+export * from './delete-product';

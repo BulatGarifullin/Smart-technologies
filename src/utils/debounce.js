@@ -1,18 +1,14 @@
 import { setSearch } from '../actions';
 
-export const debounce = (fn, delay, dispatch) => {
+export const debounce = (delay, dispatch) => {
 	let timeoutId;
 
-	return (...args) => {
-		const [flag, targetValue] = args;
-
+	return (targetValue) => {
 		clearTimeout(timeoutId);
 
 		timeoutId = setTimeout(() => {
-			fn(flag);
 			dispatch(
 				setSearch({
-					shouldSearch: flag,
 					searchPhrase: targetValue,
 				}),
 			);

@@ -1,10 +1,12 @@
-import { authorize, register, logout, fetchCategorys, fetchBestsellers, fetchProducts } from './operations';
+import { authorize, register, logout, fetchCategorys, fetchProducts, fetchProduct, saveProduct, removeProduct } from './operations';
 
 export const server = {
 	authorize,
 	register,
 	logout,
 	fetchCategorys,
-	fetchBestsellers,
 	fetchProducts,
+	fetchProduct,
+	saveProduct,
+	removeProduct,
 };

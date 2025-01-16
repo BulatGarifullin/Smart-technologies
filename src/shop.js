@@ -1,14 +1,22 @@
 import { Route, Routes } from 'react-router-dom';
-import { Header, Navigation, Footer, Modal } from './components';
-import { Main } from './pages';
+import { Header, Navigation, Footer, Modal, Error, Plug } from './components';
+import { Main, Product, Basket, ListOfProducts } from './pages';
 import { useDispatch } from 'react-redux';
 import { useLayoutEffect } from 'react';
 import { setUser } from './actions';
 import styled from 'styled-components';
+import { ERROR } from './constants';
+
+const Container = styled.div`
+	min-height: 100vh;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+`;
 
 const AppColumn = styled.div`
 	width: 1300px;
-	min-height: 100%;
+	height: 100%;
 	position: relative;
 	display: flex;
 	flex-direction: column;
@@ -38,17 +46,23 @@ export const Shop = () => {
 	}, [dispatch]);
 
 	return (
-		<>
+		<Container>
 			<Header />
 			<Navigation />
 			<AppColumn>
 				<Routes>
-					<Route path="/" element={<Main />}></Route>
-					<Route path="/post" element={<div>Какая-то страница</div>}></Route>
+					<Route path="/" element={<Main />} />
+					<Route path="/products/" element={<ListOfProducts />} />
+					<Route path="/product/" element={<Product />} />
+					<Route path="/product/:id" element={<Product />} />
+					<Route path="/product/:id/edit" element={<Product />} />
+					<Route path="/basket" element={<Basket />} />
+					<Route path="/plug" element={<Plug />} />
+					<Route path="/*" element={<Error error={ERROR.PAGE_NOT_EXIST} />} />
 				</Routes>
 			</AppColumn>
 			<Footer />
 			<Modal />
-		</>
+		</Container>
 	);
 };

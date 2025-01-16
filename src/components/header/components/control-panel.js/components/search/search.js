@@ -7,20 +7,19 @@ import { useDispatch } from 'react-redux';
 
 const SearchContainer = ({ className }) => {
 	const [searchPhrase, setSearchPhrase] = useState('');
-	const [sholudSearch, setShouldSearch] = useState('');
 	const dispatch = useDispatch();
 
-	const startDelaySearch = useMemo(() => debounce(setShouldSearch, 2000, dispatch), []);
+	const startDelaySearch = useMemo(() => debounce(2000, dispatch), []);
 
 	const onSearch = ({ target }) => {
 		setSearchPhrase(target.value);
-		startDelaySearch(!sholudSearch, target.value);
+		startDelaySearch(target.value);
 	};
 
 	return (
 		<div className={className}>
 			<Icon IconComponent={SearchSVG} size="24px" inactive={true} />
-			<Input value={searchPhrase} onChange={onSearch} placeholder="Поиск"></Input>
+			<Input value={searchPhrase} onChange={onSearch} placeholder="Поиск" type="search"></Input>
 		</div>
 	);
 };

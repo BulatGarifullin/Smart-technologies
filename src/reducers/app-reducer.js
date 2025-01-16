@@ -13,8 +13,7 @@ const initialAppState = {
 		isRegistration: false,
 	},
 	search: {
-		shouldSearch: false,
-		searchPhrase: '',
+		searchPhrase: null,
 	},
 };
 

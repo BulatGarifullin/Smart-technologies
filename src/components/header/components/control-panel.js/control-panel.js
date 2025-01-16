@@ -7,7 +7,7 @@ import { StyledLink, Button, Icon } from '../../../';
 import { Search } from './components';
 import { useDispatch, useSelector } from 'react-redux';
 import { logout, openModal } from '../../../../actions';
-import { selectUserRole, selectUserSession } from '../../../../selectors';
+import { selectBasket, selectUserRole, selectUserSession } from '../../../../selectors';
 import { ROLE } from '../../../../constants';
 import styled from 'styled-components';
 
@@ -15,6 +15,7 @@ const ControlPanelContainer = ({ className }) => {
 	const dispatch = useDispatch();
 	const roleId = useSelector(selectUserRole);
 	const session = useSelector(selectUserSession);
+	const basket = useSelector(selectBasket);
 
 	const onAuthorize = () => {
 		dispatch(
@@ -33,24 +34,26 @@ const ControlPanelContainer = ({ className }) => {
 	return (
 		<div className={className}>
 			<Search />
-			<StyledLink>
+			<StyledLink to="/plug">
 				<Icon IconComponent={EyeSVG} size="48px" />
 			</StyledLink>
 
-			<StyledLink>
+			<StyledLink to="/plug">
 				<Icon IconComponent={LikeSVG} size="48px" />
 			</StyledLink>
 
-			<StyledLink>
-				<Icon IconComponent={CompareSVG} size="48px" />
-			</StyledLink>
+			{roleId === ROLE.ADMIN && (
+				<StyledLink to="/products">
+					<Icon IconComponent={CompareSVG} size="48px" />
+				</StyledLink>
+			)}
 
-			<StyledLink>
-				<Icon IconComponent={CartSVG} size="48px" />
+			<StyledLink to="/basket">
+				<Icon IconComponent={CartSVG} size="48px" color={basket.totalPrice ? '#2A5275' : ''} />
 			</StyledLink>
 
 			{roleId === ROLE.GUEST ? (
-				<Button onClick={onAuthorize} margin="0 0 0 20px">
+				<Button onClick={onAuthorize} margin="0 0 0 20px" hoverColor="#4878A6">
 					Войти
 				</Button>
 			) : (

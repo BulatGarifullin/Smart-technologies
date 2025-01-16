@@ -1,7 +1,7 @@
 import { useSelector } from 'react-redux';
 import { RegistrationOrAuthorization } from '../../pages';
-import styled from 'styled-components';
 import { selectModalIsAuthorization, selectModalIsOpen, selectModalIsRegistration } from '../../selectors';
+import styled from 'styled-components';
 
 const ModalContainer = ({ className }) => {
 	const isOpen = useSelector(selectModalIsOpen);

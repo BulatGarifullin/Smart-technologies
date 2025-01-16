@@ -7,12 +7,15 @@ import { Logo } from '../header/components';
 import { H1 } from '../h1/h1';
 import { Icon } from '../icon/icon';
 import styled from 'styled-components';
+import { useNavigate } from 'react-router-dom';
 
 const Phone = styled.div`
 	font-weight: bold;
 `;
 
 const FooterContainer = ({ className }) => {
+	const navigate = useNavigate();
+
 	return (
 		<footer className={className}>
 			<div className="container">
@@ -35,27 +38,27 @@ const FooterContainer = ({ className }) => {
 							Для клиента
 						</H1>
 						<div>
-							<StyledLink to="/" color="#070C11">
+							<StyledLink to="/plug" color="#070C11">
 								Как купить
 							</StyledLink>
 							<br />
-							<StyledLink to="/" color="#070C11">
+							<StyledLink to="/plug" color="#070C11">
 								Доставка и оплата
 							</StyledLink>
 							<br />
-							<StyledLink to="/" color="#070C11">
+							<StyledLink to="/plug" color="#070C11">
 								Кредит
 							</StyledLink>
 							<br />
-							<StyledLink to="/" color="#070C11">
+							<StyledLink to="/plug" color="#070C11">
 								Политика конфиденциальности
 							</StyledLink>
 							<br />
-							<StyledLink to="/" color="#070C11">
+							<StyledLink to="/plug" color="#070C11">
 								Вопросы и ответы (F.A.Q.)
 							</StyledLink>
 							<br />
-							<StyledLink to="/" color="#070C11">
+							<StyledLink to="/plug" color="#070C11">
 								Сервис и гарантия
 							</StyledLink>
 						</div>
@@ -65,27 +68,27 @@ const FooterContainer = ({ className }) => {
 							О магазине
 						</H1>
 						<div>
-							<StyledLink to="/" color="#070C11">
+							<StyledLink to="/plug" color="#070C11">
 								Отзывы
 							</StyledLink>
 							<br />
-							<StyledLink to="/" color="#070C11">
+							<StyledLink to="/plug" color="#070C11">
 								Наши преимущества
 							</StyledLink>
 							<br />
-							<StyledLink to="/" color="#070C11">
+							<StyledLink to="/plug" color="#070C11">
 								История компании
 							</StyledLink>
 							<br />
-							<StyledLink to="/" color="#070C11">
+							<StyledLink to="/plug" color="#070C11">
 								Сотрудничество
 							</StyledLink>
 							<br />
-							<StyledLink to="/" color="#070C11">
+							<StyledLink to="/plug" color="#070C11">
 								Партнерская программа
 							</StyledLink>
 							<br />
-							<StyledLink to="/" color="#070C11">
+							<StyledLink to="/plug" color="#070C11">
 								Вакансии
 							</StyledLink>
 						</div>
@@ -95,11 +98,11 @@ const FooterContainer = ({ className }) => {
 							Сотрудничество
 						</H1>
 						<div>
-							<StyledLink to="/" color="#070C11">
+							<StyledLink to="/plug" color="#070C11">
 								Оптом
 							</StyledLink>
 							<br />
-							<StyledLink to="/" color="#070C11">
+							<StyledLink to="/plug" color="#070C11">
 								Дропшиппинг
 							</StyledLink>
 						</div>
@@ -108,10 +111,21 @@ const FooterContainer = ({ className }) => {
 				<div className="footer-links">
 					<div className="textLeft">SmartТехника © 2021 Все права защищены</div>
 					<div>
-						<Icon IconComponent={TwitterSVG} size="48px" hoverIcon="#2A5275" />
-						<Icon IconComponent={FacebookSVG} size="48px" hoverIcon="#2A5275" />
-						<Icon IconComponent={VkSVG} size="48px" hoverIcon="#2A5275" />
-						<Icon IconComponent={InstSVG} size="48px" hoverIcon="#2A5275" />
+						<StyledLink to="https://x.com" target="_blank">
+							<Icon IconComponent={TwitterSVG} size="48px" hoverIcon="#2A5275" />
+						</StyledLink>
+						<StyledLink
+							to="https://www.facebook.com/login/?next=https%3A%2F%2Fwww.facebook.com%2F%3Flocale%3Dru_RU"
+							target="_blank"
+						>
+							<Icon IconComponent={FacebookSVG} size="48px" hoverIcon="#2A5275" />
+						</StyledLink>
+						<StyledLink to="https://vk.com/feed" target="_blank">
+							<Icon IconComponent={VkSVG} size="48px" hoverIcon="#2A5275" />
+						</StyledLink>
+						<StyledLink to="https://www.instagram.com/" target="_blank">
+							<Icon IconComponent={InstSVG} size="48px" hoverIcon="#2A5275" />
+						</StyledLink>
 					</div>
 					<div className="textRight">Разработка: websl.ru</div>
 				</div>
@@ -129,7 +143,6 @@ export const Footer = styled(FooterContainer)`
 	bottom: 0;
 	left: 0;
 	right: 0;
-	height: 418px;
 
 	& .container {
 		width: 1300px;

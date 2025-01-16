@@ -9,3 +9,6 @@ export * from './input/input';
 export * from './img/img';
 export * from './modal/modal';
 export * from './form-error/form-error';
+export * from './private-content/private-content';
+export * from './error/error';
+export * from './plug/plug';

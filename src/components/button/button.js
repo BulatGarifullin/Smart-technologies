@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-const ButtonContainer = ({ className, children, ...props }) => {
+const ButtonContainer = ({ className, children, hoverColor, ...props }) => {
 	return (
 		<button className={className} {...props}>
 			{children}
@@ -23,6 +23,7 @@ export const Button = styled(ButtonContainer)`
 	border-radius: 5px;
 
 	&:hover {
+		background-color: ${({ hoverColor = '' }) => hoverColor};
 		cursor: ${({ disabled }) => (disabled ? 'default' : 'pointer')};
 	}
 

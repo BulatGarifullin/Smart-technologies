@@ -15,6 +15,8 @@ import { ROLE } from '../../constants';
 import styled from 'styled-components';
 
 const RegistrationOrAuthorizationContainer = ({ className, isRegistration }) => {
+	const [passwordVisible, setPasswordVisible] = useState(false);
+	const [repeatPasswordVisible, setRepeatPasswordVisible] = useState(false);
 	const dispatch = useDispatch();
 	const requestServer = useServerRequest();
 	const [serverError, setServerError] = useState(null);
@@ -31,6 +33,9 @@ const RegistrationOrAuthorizationContainer = ({ className, isRegistration }) => 
 		resolver: yupResolver(formScheme),
 		mode: 'onSubmit',
 	});
+
+	const togglePasswordVisibility = () => setPasswordVisible(!passwordVisible);
+	const toggleRepeatPasswordVisibility = () => setRepeatPasswordVisible(!repeatPasswordVisible);
 
 	const onSubmit = ({ login, password, passcheck }) => {
 		if (isRegistration) {
@@ -90,12 +95,12 @@ const RegistrationOrAuthorizationContainer = ({ className, isRegistration }) => 
 					<Icon IconComponent={LockSVG} size="24px" inactive={true} />
 					<Input
 						className="input password"
-						type="password"
+						type={passwordVisible ? 'text' : 'password'}
 						{...register('password', {
 							onChange: () => {},
 						})}
 					/>
-					<Icon IconComponent={EyeInputSVG} size="24px" />
+					<Icon IconComponent={EyeInputSVG} size="24px" onClick={togglePasswordVisibility} />
 				</label>
 				{isRegistration && (
 					<label>
@@ -103,12 +108,12 @@ const RegistrationOrAuthorizationContainer = ({ className, isRegistration }) => 
 						<Icon IconComponent={LockSVG} size="24px" inactive={true} />
 						<Input
 							className="input pass-check"
-							type="password"
+							type={repeatPasswordVisible ? 'text' : 'password'}
 							{...register('passcheck', {
 								onChange: () => {},
 							})}
 						/>
-						<Icon IconComponent={EyeInputSVG} size="24px" />
+						<Icon IconComponent={EyeInputSVG} size="24px" onClick={toggleRepeatPasswordVisibility} />
 					</label>
 				)}
 				{isRegistration ? (
