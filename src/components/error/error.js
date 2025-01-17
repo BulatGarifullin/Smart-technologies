@@ -10,7 +10,6 @@ const ErrorContainer = ({ className, error }) =>
 	);
 
 export const Error = styled(ErrorContainer)`
-	// height: 100%;
 	height: calc(100vh - 535px);
 	display: flex;
 	flex-direction: column;

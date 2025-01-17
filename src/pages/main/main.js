@@ -3,12 +3,15 @@ import { useSelector } from 'react-redux';
 import { Products, MainPage } from './components';
 import { useServerRequest } from '../../hooks';
 import { selectCategoryProductsId, selectCategoryProductsName, selectIsLoadedProducts, selectSearchPhrase } from '../../selectors';
+import { useLoader } from '../../hooks/use-loader';
+import { Loader } from '../../components';
 import styled from 'styled-components';
 
 const MainContainer = ({ className }) => {
 	const [categorysOfProducts, setCategorysOfProducts] = useState([]);
 	const [listOfProducts, setListOfProducts] = useState([]);
 	const [sortOrder, setSortOrder] = useState('asc');
+	const { isLoading, setIsLoading } = useLoader();
 	const requestServer = useServerRequest();
 
 	const searchPhrase = useSelector(selectSearchPhrase);
@@ -20,11 +23,18 @@ const MainContainer = ({ className }) => {
 	const notFoundProducts = listOfProducts.length === 0 ? true : false;
 
 	useEffect(() => {
-		requestServer('fetchProducts', categoryId, searchPhrase, sortOrder).then(({ error, res }) => {
-			setCategorysOfProducts(res.categorys);
-			setListOfProducts(res.products);
-		});
+		setIsLoading(true);
+		requestServer('fetchProducts', categoryId, searchPhrase, sortOrder)
+			.then(({ error, res }) => {
+				setCategorysOfProducts(res.categorys);
+				setListOfProducts(res.products);
+			})
+			.finally(() => setIsLoading(false));
 	}, [isLoadedProducts, categoryId, requestServer, searchPhrase, sortOrder]);
+
+	if (isLoading) {
+		return <Loader />;
+	}
 
 	return (
 		<main className={className}>

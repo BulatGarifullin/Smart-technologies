@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { Button, H1, PrivateContent } from '../../components';
+import { Button, H1, Loader, PrivateContent } from '../../components';
 import { ProductItem } from './components';
 import { ROLE } from '../../constants';
 import { useNavigate } from 'react-router-dom';
@@ -7,6 +7,7 @@ import { useServerRequest } from '../../hooks';
 import { useEffect, useState } from 'react';
 import { removeProductAsync } from '../../actions';
 import { useDispatch } from 'react-redux';
+import { useLoader } from '../../hooks/use-loader';
 
 /* В идеале еще добавить пагинацию и  локальный поиск по списку товаров(м/у кнопкой и заголовком */
 
@@ -15,6 +16,7 @@ const ListOfProductsContainer = ({ className }) => {
 	const navigate = useNavigate();
 	const dispatch = useDispatch();
 	const requestServer = useServerRequest();
+	const { isLoading, setIsLoading } = useLoader();
 
 	const handleCreateNewProduct = () => navigate('/product');
 
@@ -27,10 +29,17 @@ const ListOfProductsContainer = ({ className }) => {
 	};
 
 	useEffect(() => {
-		requestServer('fetchProducts', null, null, null, 'allProducts').then(({ error, res }) => {
-			setAllProducts(res.productsWithFlag);
-		});
+		setIsLoading(true);
+		requestServer('fetchProducts', null, null, null, 'allProducts')
+			.then(({ error, res }) => {
+				setAllProducts(res.productsWithFlag);
+			})
+			.finally(() => setIsLoading(false));
 	}, []);
+
+	if (isLoading) {
+		return <Loader />;
+	}
 
 	return (
 		<PrivateContent access={[ROLE.ADMIN]} serverError={null}>

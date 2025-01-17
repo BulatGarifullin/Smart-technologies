@@ -55,7 +55,7 @@ const ProductFormContainer = ({ className, product, categorys }) => {
 	};
 
 	const handleOldPriceChange = (value) => {
-		const parsedValue = parseFloat(value) || 0;
+		const parsedValue = Math.round(Number(value)) || 0;
 		setOldPriceValue(parsedValue);
 
 		const discountInRubles = (parsedValue * discountInPercentValue) / 100;
@@ -66,7 +66,8 @@ const ProductFormContainer = ({ className, product, categorys }) => {
 	};
 
 	const handleNewPriceChange = (value) => {
-		const parsedValue = parseFloat(value) || 0;
+		const parsedValue = Math.round(Number(value)) || 0;
+
 		setNewPriceValue(parsedValue);
 
 		const discountInRubles = oldPriceValue - parsedValue;
@@ -77,7 +78,8 @@ const ProductFormContainer = ({ className, product, categorys }) => {
 	};
 
 	const handleDiscountInPercentChange = (value) => {
-		const parsedValue = parseFloat(value) || 0;
+		const parsedValue = Math.round(Number(value)) || 0;
+
 		setDiscountInPercentValue(parsedValue);
 
 		const discountInRubles = (oldPriceValue * parsedValue) / 100;
@@ -88,7 +90,8 @@ const ProductFormContainer = ({ className, product, categorys }) => {
 	};
 
 	const handleDiscountChange = (value) => {
-		const parsedValue = parseFloat(value) || 0;
+		const parsedValue = Math.round(Number(value)) || 0;
+
 		setDiscountValue(parsedValue);
 
 		const newPrice = oldPriceValue - parsedValue;

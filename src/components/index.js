@@ -12,3 +12,4 @@ export * from './form-error/form-error';
 export * from './private-content/private-content';
 export * from './error/error';
 export * from './plug/plug';
+export * from './loader/loader';

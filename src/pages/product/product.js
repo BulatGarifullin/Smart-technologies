@@ -2,17 +2,18 @@ import { useEffect, useState } from 'react';
 import { useMatch, useParams } from 'react-router-dom';
 import { useServerRequest } from '../../hooks';
 import { useDispatch, useSelector } from 'react-redux';
-import { ACTION_TYPE, loadProductAsync, setProductData } from '../../actions';
+import { ACTION_TYPE, setProductData } from '../../actions';
 import { selectProduct } from '../../selectors';
-import { Error, PrivateContent } from '../../components';
+import { Error, Loader, PrivateContent } from '../../components';
 import { ROLE } from '../../constants';
 import { ProductContent, ProductForm } from './components';
 import { initialProductState } from '../../reducers';
+import { useLoader } from '../../hooks/use-loader';
 import styled from 'styled-components';
 
 const ProductContainer = ({ className }) => {
 	const [error, setError] = useState(null);
-	const [isLoading, setIsLoading] = useState(true);
+	const { isLoading, setIsLoading } = useLoader();
 	const [categorys, setCategorys] = useState([]);
 
 	const params = useParams();
@@ -23,22 +24,21 @@ const ProductContainer = ({ className }) => {
 	const product = useSelector(selectProduct);
 
 	useEffect(() => {
+		setIsLoading(true);
+
 		if (isCreating) {
 			setIsLoading(false);
 			return;
 		}
 
-		Promise.all([requestServer('fetchProduct', params.id), requestServer('fetchCategorys')]).then(([productsData, categorysData]) => {
-			dispatch(setProductData(productsData.res));
-			setCategorys(categorysData.res);
-			setError(productsData.error || categorysData.error);
-			setIsLoading(false);
-		});
-
-		// dispatch(loadProductAsync(requestServer, params.id)).then((productData) => {
-		// 	setError(productData.error);
-		// 	setIsLoading(false);
-		// });
+		Promise.all([requestServer('fetchProduct', params.id), requestServer('fetchCategorys')])
+			.then(([productsData, categorysData]) => {
+				dispatch(setProductData(productsData.res));
+				setCategorys(categorysData.res);
+				setError(productsData.error || categorysData.error);
+			})
+			.catch((err) => setError(err))
+			.finally(() => setIsLoading(false));
 
 		return () => {
 			dispatch({ type: ACTION_TYPE.RESET_PRODUCT_DATA });
@@ -46,7 +46,7 @@ const ProductContainer = ({ className }) => {
 	}, [requestServer, dispatch, params.id, isCreating]);
 
 	if (isLoading) {
-		return null;
+		return <Loader />;
 	}
 
 	const SpecificProductPage =
